@@ -49,15 +49,31 @@ filter(iris_sub, Sepal.Length < 5)
          Sepal.Length < 5, Species == "setosa")  
 # Either Sepal.Length is less than 5 OR Species equals "setosa"
   filter(iris_sub,
-         Sepal.Length < 5 | Species == "setosa")  
- 
-##Arrange: Increasing/ascending order
+         Sepal.Length < 5 | Species == "setosa") 
+  
+    ##Arrange: Increasing/ascending order
   
   arrange(iris_sub, Sepal.Length)
 
 ##Decreasing/descending order
   
-  arrange(iris_sub, desc(Sepal.Length)) 
+  arrange(iris_sub, desc(Sepal.Length))
+  
+  ##Exercise
+  #1. Sepal.Width is greater than 3.0 and assign the new dataframe to iris_3
+  iris_3 <- iris_sub %>%
+    filter(Sepal.Width > 3.0)
+  print (iris_3)
+  
+  #2. Species is "setosa" and assign the new dataframe to iris_setosa
+  iris_setosa <- iris_sub %>%
+    filter(Species == "setosa")
+  print(iris_setosa)
+  
+  #3. Sepal.Width is greater than 3.0 AND Species is "setosa", and assign the new dataframe to iris_3_setosa
+  iris_3_setosa <- iris_sub %>%
+    filter(Sepal.Width > 3.0, Species == "setosa")
+  print (iris_3_setosa)
   
   #Select one column
   
@@ -106,7 +122,22 @@ filter(iris_sub, Sepal.Length < 5)
   
   mutate(iris_sub, sl_two_times = 2 * Sepal.Length)
   
-  #Excersis 
+  #column manipulation Exercise 
+  
+  ##1. Select column Petal.Width and Species and assign the new dataframe to iris_pw
+  iris_pw <- iris_sub %>%
+    select(Petal.Width, Species)
+  print (iris_pw)
+  
+  #2. Select columns starting with "Petal" → iris_petal
+
+  iris_petal <- iris_sub %>%
+    select(starts_with("Petal"))
+  
+  ##3. Add new column pw_two_times by doubling values in column Petal.Width, and assign the new dataframe to iris_pw_two
+  iris_pw_two <- iris_sub %>%
+    mutate(pw_two_times = Petal.Width * 2)
+  print (iris_pw_two)
   
   library(dplyr)
   
@@ -123,3 +154,18 @@ filter(iris_sub, Sepal.Length < 5)
 df_tw<-iris_sub %>% 
   select(Sepal.Length) %>% 
 mutate(twice = 2* Sepal.Length)
+
+df_vir_sl <- iris_sub %>% 
+  filter(Species == "virginica") %>% 
+  select(Sepal.Length)
+
+print(df_vir_sl)
+
+#Subset iris_sub by Species column (choose only "setosa" ) and add a new column pw_two_times by doubling values in column Petal.Width. 
+#Assign the resultant dataframe to iris_pipe. 
+
+iris_pipe <- iris_sub %>%
+  filter(Species == "setosa") %>%
+  mutate(pw_two_times = Petal.Width * 2)
+print (iris_pipe)
+
