@@ -81,16 +81,15 @@ v_l <- runif(150, 60, 150)
 v_w <- rnorm(n = length(v_l),
              mean = 0.1 * v_l^1.5,
              sd = 10)
+v_sp <- sample(c("bhc", "rbs", "gsf"),
+               size = length(v_l),
+               replace = TRUE)
 
 df_length <- tibble(length = v_l,
-                    sp_code = sample(c("bhc", "rbs", "gsf"),
-                                     size = length(v_l),
-                                     replace = TRUE))
+                    sp_code = v_sp)
 
 df_weight <- tibble(weight = v_w,
-                    sp_code = sample(c("bhc", "rbs", "gsf"),
-                                     size = length(v_l),
-                                     replace = TRUE))
+                    sp_code = v_sp)
 
 # 20: Draw a scatter plot (point plot) of `length` vs. `weight` from `df_fish`,  
 # coloring the points by species code (`sp_code`).
