@@ -103,15 +103,25 @@ df_mtcars<- df_mtcars %>%
 
 # 15: Draw a box plot showing car weight (`wt`) for each number of cylinders (`f_cyl`).
 library(ggplot2)
-ggplot(df_mtcars, aes(x= f_cyl, y = wt))
 
-
+ggplot(df_mtcars, aes(x = f_cyl, y = wt)) + 
+  geom_boxplot()
+       
 # 16: Calculate the average car weight (`wt`) separately for each number of cylinders (`cyl`).
-
+library(dplyr)
+df_mtcars  %>% 
+  group_by(cly) %>% 
+  summarise(avg_wt= mean(wt))
 
 # 17: Identify the heaviest car make (`wt`) among cars with 6 cylinders (`cyl`).
+df_mtcars  %>% 
+  filter(cyl== 6) %>% 
+  arrange(wt)
 
 # 18: Create a histogram showing the distribution of 1/4 mile time (`qsec`).
+ 
+ggplot(mtcars, aes(x = qsec)) +
+  geom_histogram()
 
 # 19: The following script creates two tibbles:  
 # `df_length` (body length) and `df_weight` (body weight),  
@@ -133,6 +143,16 @@ df_weight <- tibble(weight = v_w,
                     sp_code = sample(c("bhc", "rbs", "gsf"),
                                      size = length(v_l),
                                      replace = TRUE))
+df_fish <-left_join(df_length, df_weight, by = "sep_code")
+
+df_fish <- right_join(df_length, df_weight, by = "sep_code")
+
+df_fish <- inner_join(df_length, df_weight, by = "sp_code")
 
 # 20: Draw a scatter plot (point plot) of `length` vs. `weight` from `df_fish`,  
 # coloring the points by species code (`sp_code`).
+
+library(ggplot2)
+
+ggplot(df_fish, aes(x = length, y = weight, color = sp_code)) +
+  geom_point()
