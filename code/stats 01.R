@@ -1,13 +1,12 @@
 library(tidyverse)
 
 # Central tendency -------------------------------------------------------
-
 # hotkey for a section ctrl 
 # Arithmetic mean
 #calculate the arithmetic mean of v-x using length() 
  v_x<-rnorm(10)
  v_x
- mu_xsum(v_x)/length (v_x)
+ mu_sum(v_x)/length (v_x)
  # geometric mean
  #use prod( ), length(),^
  v_y<- runif(10, min= 10, max = 20)
