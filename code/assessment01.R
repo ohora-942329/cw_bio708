@@ -70,7 +70,8 @@ v_make<- rownames(mtcars)
 v_make
 
 # 10: Add `v_make` as a new column to `df_mtcars` and name the column `"make"`.
-library(dplyr)
+#library(dplyr)
+
 df_mtcars<-mutate(df_mtcars, make= v_make)
 
 
@@ -102,13 +103,13 @@ df_mtcars<- df_mtcars %>%
   mutate(f_cyl = factor(cyl))
 
 # 15: Draw a box plot showing car weight (`wt`) for each number of cylinders (`f_cyl`).
-library(ggplot2)
+#library(ggplot2)
 
 ggplot(df_mtcars, aes(x = f_cyl, y = wt)) + 
   geom_boxplot()
        
 # 16: Calculate the average car weight (`wt`) separately for each number of cylinders (`cyl`).
-library(dplyr)
+#library(dplyr)
 df_mtcars  %>% 
   group_by(cly) %>% 
   summarise(avg_wt= mean(wt))
@@ -152,7 +153,7 @@ df_fish <- inner_join(df_length, df_weight, by = "sp_code")
 # 20: Draw a scatter plot (point plot) of `length` vs. `weight` from `df_fish`,  
 # coloring the points by species code (`sp_code`).
 
-library(ggplot2)
+#library(ggplot2)
 
 ggplot(df_fish, aes(x = length, y = weight, color = sp_code)) +
   geom_point()
