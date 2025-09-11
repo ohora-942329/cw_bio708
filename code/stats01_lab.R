@@ -2,6 +2,8 @@
 library(tidyverse)
 library(patchwork)
 
+# central tendency --------------------------------------------------------
+
 # 7.3.1 Q1
 z <- exp(rnorm(n = 1000, mean = 0, sd = 0.1))
 
@@ -66,3 +68,35 @@ g2 <- df_z %>%
 
 # this syntax works for ggplot objects after loading `library(patchwork)`
 g1 / g2
+
+
+# variation ---------------------------------------------------------------
+
+w <- rnorm(100, mean = 10, sd = 1) # unit: g
+head(w) # show first 10 elements in w
+
+# Q1
+## gram to milligram
+m <- 1000 * w # unit: milligram
+
+# Q2
+## standard deviaion
+s2_w <- sum((w - mean(w))^2) / length(w)
+s_w <- sqrt(s2_w)
+
+s2_m <- sum((m - mean(m))^2) / length(m)
+s_m <- sqrt(s2_m)
+
+## MAD
+mad_w <- median(abs(w - median(w)))
+mad_m <- median(abs(m - median(m)))
+
+# Q3
+## CV
+cv_w <- s_w / mean(w) # numerator has a unit of [g], denom [g]
+cv_m <- s_m / mean(m) # numerator has a unit of [mg], denom [mg]
+
+## MAD / median
+madr_w <- mad_w / median(w)
+madr_m <- mad_m / median(m)
+
