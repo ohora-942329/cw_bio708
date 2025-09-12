@@ -14,12 +14,8 @@ z<-exp(rnorm(n = 1000, mean = 0, sd = 0.1))
 
 mu_z <- mean(z)
 
-
 ## manual
 sum(z) / length(z)
-n_z <- length(z)
-mu_z <- mu_z / n_z
-
 
 # Geometric mean
 ## taking the mean in log scale
