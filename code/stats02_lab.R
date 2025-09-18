@@ -69,13 +69,79 @@ g100_var <- df_est %>%
   ggplot(aes(x = var100)) +
   geom_histogram() +
   geom_vline(xintercept = sigma2) +
-  scale_x_continuous(limits = c(10, 40))
+  scale_x_continuous(limits = c(0, 50))
 
 g50_var <- df_est %>% 
   ggplot(aes(x = var50)) +
   geom_histogram() +
   geom_vline(xintercept = sigma2) +
-  scale_x_continuous(limits = c(10, 40))
+  scale_x_continuous(limits = c(0, 50))
+
+g100_var / g50_var
+
+
+# # 8.3. Question 2 -------------------------------------------------------
+
+## create a dataframe with filter
+df_h10 <- df_h %>% 
+  filter(height > 10)
+
+## estimates with 100 plant individuals
+mu100_i <- var100_i <- NULL
+
+for (i in 1:100) {
+  df_i <- df_h10 %>%
+    sample_n(size = 100)
+  
+  (mu100_i[i] <- mean(df_i$height))
+  (var100_i[i] <- var(df_i$height)) 
+}
+
+## estimates with 50 plant individuals
+mu50_i <- var50_i <- NULL
+
+for (i in 1:100) {
+  df_i <- df_h10 %>%
+    sample_n(size = 50)
+  
+  (mu50_i[i] <- mean(df_i$height))
+  (var50_i[i] <- var(df_i$height))
+}
+
+## create tibbles
+df_est <- tibble(mu100 = mu100_i,
+                 var100 = var100_i,
+                 mu50 = mu50_i,
+                 var50 = var50_i)
+
+## histogram
+## - mu
+g100_mu <- df_est %>% 
+  ggplot(aes(x = mu100)) +
+  geom_histogram() +
+  geom_vline(xintercept = mu) +
+  scale_x_continuous(limits = c(18, 22))
+
+g50_mu <- df_est %>% 
+  ggplot(aes(x = mu50)) +
+  geom_histogram() +
+  geom_vline(xintercept = mu) +
+  scale_x_continuous(limits = c(18, 22))
+
+g100_mu / g50_mu
+
+## - variance
+g100_var <- df_est %>% 
+  ggplot(aes(x = var100)) +
+  geom_histogram() +
+  geom_vline(xintercept = sigma2) +
+  scale_x_continuous(limits = c(0, 50))
+
+g50_var <- df_est %>% 
+  ggplot(aes(x = var50)) +
+  geom_histogram() +
+  geom_vline(xintercept = sigma2) +
+  scale_x_continuous(limits = c(0, 50))
 
 g100_var / g50_var
 
