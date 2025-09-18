@@ -42,7 +42,7 @@ mu_i <- var_i <- NULL
 for (i in 1:100) {
   df_i <- df_h0 %>%
     sample_n(10)
-
+  
   (mu_i[i] <- mean(df_i$height))
   (var_i[i] <- sum((df_i$height - mean(df_i$height))^2) / nrow(df_i))
 }
@@ -76,16 +76,16 @@ mu_i <- var_i <- var_ub_i <- NULL # create empty objects
 
 # repeat the work in {} from i = 1 to i = 100
 for (i in 1:100) {
-
+  
   df_i <- df_h0 %>%
     sample_n(size = 10) # random samples of 10 individuals
-
+  
   # save mean for sample set i
   mu_i[i] <- mean(df_i$height)
-
+  
   # save variance for sample set i
   var_i[i] <- sum((df_i$height - mean(df_i$height))^2) / nrow(df_i)
-
+  
   var_ub_i[i] <- var(df_i$height)
 }
 
