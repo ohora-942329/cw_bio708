@@ -2,7 +2,7 @@
 library(tidyverse)
 # load csv data on R
 df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
-df_h0 %>% 
+df_h0%>% 
   ggplot(aes(x = height)) + 
   geom_histogram(binwidth = 1, # specify bin width
                  center = 0.5) + # bin's center specification
