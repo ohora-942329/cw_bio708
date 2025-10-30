@@ -1,6 +1,6 @@
 # Ctrl (Command) + Shift + N is a hotkey for creating a new script file
 # Ctrl + I is to fix indent
-# regression
+# linear model
 
 pacman::p_load(tidyverse,
                patchwork,
