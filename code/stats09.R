@@ -90,9 +90,19 @@ pr <- sapply(X = lambda,
 df_pois <- tibble(lambda = lambda,
                   pr = pr)
 
+## raw likelihood
 df_pois %>% 
   ggplot(aes(x = lambda,
              y = pr)) +
+  geom_point() +
+  geom_line() +
+  labs(x = "lambda",
+       y = "Pr")
+
+## log likelihood
+df_pois %>% 
+  ggplot(aes(x = lambda,
+             y = log(pr))) +
   geom_point() +
   geom_line() +
   labs(x = "lambda",
