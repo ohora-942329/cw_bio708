@@ -2,7 +2,7 @@
 #ctrl + I is fix indent
 ##Model comparison
 pacman::p_load(tidyverse, 
-               pactchw,here)
+               pactchwork,here)
 
 # Least squares -----------------------------------------------------------
 
@@ -96,8 +96,19 @@ df_pois <- tibble(lambda = lambda,
   
   df_pois %>% 
     arrange(desc(pr))
-  print()
-  
+ 
   mean(c(3, 2, 5))
   
+  # load garden plant data
   
+df_count <- read_csv(here("data_raw/data_garden_count.csv"))
+  
+  m_pois <- glm(count ~ nitrate,
+                data = df_count,
+                family = "poisson")
+  print(m_pois)
+  
+  logLik(m_pois) 
+  
+exp(-44.9)  
+
