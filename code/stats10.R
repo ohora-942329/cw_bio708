@@ -5,7 +5,7 @@ pacman::p_load(tidyverse,
                pactchwork,here)
 
 
-# R squar -----------------------------------------------------------------
+# R square -----------------------------------------------------------------
 
 
 set.seed(1) # for reproducibility
@@ -82,7 +82,7 @@ anova(m1, m2, test = "Chisq")
 
 AIC (m1)
 AIC (m2)
-## multiple model for 
+## multiple model inference with AIC 
 
 install.packages(MuMIn)
 
@@ -93,4 +93,11 @@ m_full<- glm(n_sp~ distance + cat_area +hull_area,
     data = df_fish,
     family = "poisson")
 ## magic spell 
+options(na.action = "na.fail")
+
+##model selection table
+mst <- dredge(m_full,
+              rank = "AIC")
+
+
 
