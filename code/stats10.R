@@ -4,7 +4,6 @@
 pacman::p_load(tidyverse, 
                pactchwork,here)
 
-
 # R square -----------------------------------------------------------------
 
 
@@ -84,7 +83,10 @@ AIC (m1)
 AIC (m2)
 ## multiple model inference with AIC 
 
-install.packages(MuMIn)
+install.packages("MuMIn")
+
+library(MuMIn)
+
 
 url <- "https://raw.githubusercontent.com/aterui/public-proj_fish-richness-shubuto/master/data/data_vpart.csv"
 df_fish <- read_csv(url)
