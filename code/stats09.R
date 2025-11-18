@@ -1,6 +1,6 @@
 #ctrl (command) +shift + N is a hotkey for creating a new file
 #ctrl + I is fix indent
-##Model comparison
+##Likelihood lab
 pacman::p_load(tidyverse, 
                pactchwork,here)
 
