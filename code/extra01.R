@@ -136,23 +136,3 @@ df_messy %>%
                              yes = 1,
                              no = 0))
 
-
-# example code ------------------------------------------------------------
-
-# 
-# df_messy %>% 
-#   mutate(collector = chr_clean(collector),
-#          species = chr_clean(species),
-#          length_mm = str_squish(length_mm) %>% 
-#            str_replace(",", "\\.") %>% 
-#            str_extract("\\d{1,}") %>% 
-#            as.numeric(),
-#          sample_date = parse_date_time(sample_date,
-#                                        tz = "EST",
-#                                        order = c("Y/m/d",
-#                                                  "B d Y",
-#                                                  "d B Y")),
-#          recaptured = str_to_lower(recaptured) %>% 
-#            str_sub(start = 1L,
-#                    end = 1L)
-#   )
