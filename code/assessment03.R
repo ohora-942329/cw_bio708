@@ -3,12 +3,6 @@
 # Call suitable packages as needed.
 
 library(tidyverse)
-pacman::p_load(tidyverse,
-               patchwork,
-               janitor,
-               stringdist,
-               here)
-
 
 #  CO2 dataset ------------------------------------------------------------
 
@@ -72,7 +66,7 @@ ptype2 <- df_co2 %>%
   geom_point()
 
 # Combined plot 
-
+library(patchwork)
 ptype1/ ptype2
 
 
@@ -232,9 +226,9 @@ df_env <- janitor::clean_names(df_env)
 # (i.e., the same value for all plots). Identify these columns and remove them
 # from the dataframe. Assign the resulting dataframe to `df_env_sub`.
 
-v <- sapply(df_env, n_distinct) 
+no_var_cols <- sapply(df_env, n_distinct) 
 df_env_sub <- df_env %>% 
-  select(all_of(names(v)[which(v > 1)]))
+  select(all_of(names(no_var_cols)[which(no_var_cols > 1)]))
 
 
 # Q8 ----------------------------------------------------------------------
@@ -273,10 +267,11 @@ df_m <- df_n %>%
 # rather than the goodness of fit, and report which variables are included in 
 # the best predictive model.
 
-m <- glm(cbind(n1, n_sum - n1) ~ env_het + stream + habitat, df_m, family = "binomial") 
+df_mod <- glm(cbind(n1, n_sum - n1) ~ env_het + stream + habitat, df_m,
+         family = "binomial") 
 # the best predictive model as a comment.
 
 library(MuMIn)
 options(na.action = "na.fail")
-(ms <- dredge(m, rank = "AIC"))
-
+(ms <- dredge(df_mod, rank = "AIC"))
+## the best predictive model can be Stream and Habitat 
