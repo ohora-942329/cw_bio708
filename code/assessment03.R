@@ -22,7 +22,6 @@ head(CO2)
 
 # Q1 ----------------------------------------------------------------------
 
-
 # CO2 dataframe is a base dataframe. Convert this to a class `tibble`
 # then assign to `df_co2`
 
@@ -32,12 +31,10 @@ class(df_co2)
 
 # Q2 ----------------------------------------------------------------------
 
-
 # Convert column names to lowercase and reassign to `df_co2`
 
 df_co2 <- janitor::clean_names(df_co2)
 names(df_co2)
-
 
 # Q3 ----------------------------------------------------------------------
 
@@ -69,7 +66,6 @@ library(patchwork)
 ptype1/ ptype2
 
 # Q4 ----------------------------------------------------------------------
-
 
 # The df_co2 dataset contains the following variables:
 # - CO₂ assimilation rate
@@ -134,7 +130,6 @@ summary(mod_mississippi)
 # plants showed a more stable response, with less change in slope and baseline uptake across treatments. 
 
 
-
 # BCI data ----------------------------------------------------------------
 
 ## DATA DESCRIPTION #######################################################
@@ -170,6 +165,7 @@ df_bci <- BCI %>%
   pivot_longer(cols = cnm[1]:cnm[length(cnm)], 
                names_to = "species", 
                values_to = "count")
+head(df_bci)
 
 # BCI.env dataset:
 # This dataset contains environmental variables for the 50 plots in the BCI dataset.
@@ -195,6 +191,9 @@ df_env <- BCI.env %>%
                                     pad = 0))) %>% 
   relocate(plot)
 
+head(df_env)
+
+
 ## DATA DESCRIPTION END ####################################################
 
 # Q6 ----------------------------------------------------------------------
@@ -204,9 +203,9 @@ df_env <- BCI.env %>%
 
 df_env <- janitor::clean_names(df_env)
 
+print(df_env)
 
 # Q7 ----------------------------------------------------------------------
-
 
 # In `df_env`, some environmental variables have no variation between plots
 # (i.e., the same value for all plots). Identify these columns and remove them
@@ -216,10 +215,9 @@ no_var_cols  <- sapply(df_env, n_distinct) # This shows which columns have zero 
 df_env_sub <- df_env %>% 
   select(all_of(names(no_var_cols )[which(no_var_cols > 1)]))
 
-no_var_cols 
+no_var_cols
 
 # Q8 ----------------------------------------------------------------------
-
 
 # Calculate summary statistics for each plot using `df_bci`.
 # For each plot, compute:
@@ -258,4 +256,9 @@ df_mod <- glm(
 library(MuMIn)
 options(na.action = "na.fail")
 (ms <- dredge(df_mod, rank = "AIC"))
-#the best predictor models may be stream and habitat
+
+best_mod <- get.models(ms, 1)[[1]]
+summary(best_mod)
+## the best predictive model can be the one with the lowest AIC value, 517.3 and 
+##the highest model weight (0.716, meaning 71.6% probability of being the best model in the candidate set) Stream and Habitat 
+##habitat + env_het without stream effect. Habitat + stream is also on the second 
